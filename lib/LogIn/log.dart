@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_agustobrut/Home.dart';
-import 'package:flutter_application_agustobrut/LogIn/reg.dart';
-import 'package:flutter_application_agustobrut/LogIn/forgot.dart';
+import 'package:flutter_application/MainPage/Home.dart';
+import 'package:flutter_application/LogIn/reg.dart';
+import 'package:flutter_application/LogIn/forgot.dart';
 
 class MyTextField extends StatefulWidget {
   @override
