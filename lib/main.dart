@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/LogIn/log.dart';
+import 'package:flutter_application/SplashScreen/splash.dart';
 
 
 void main() {
@@ -15,7 +17,14 @@ class MyApp extends StatelessWidget {
 Widget build(BuildContext context){
   return MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyTextField(),
+    home: SplashScreen(),
   );
 }
+}
+@override
+Widget build(BuildContext context){
+  return MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyTextField(),
+  );
 }
