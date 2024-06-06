@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/MainPage/Home.dart';
+import 'package:flutter_application/MainPage/Navbar.dart';
 import 'dart:ui';
+
+import 'package:flutter_application/MainPage/peminjaman.dart';
 
 class DetailPage extends StatelessWidget {
   @override
@@ -9,9 +13,12 @@ class DetailPage extends StatelessWidget {
         backgroundColor: Colors.transparent, 
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context);
+             Navigator.push( 
+              context, 
+              MaterialPageRoute(builder: (context) => Nav()), 
+            ); 
           },
         ),
         title: Text(
@@ -170,7 +177,7 @@ class DetailPage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                      PageRouteBuilder(
-                                      pageBuilder: (context, animation, secondaryAnimation) => DetailPage(),
+                                      pageBuilder: (context, animation, secondaryAnimation) => Peminjaman(),
                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                         var curve = Curves.easeInOut;
 
