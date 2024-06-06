@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/MainPage/Home.dart';
+import 'package:flutter_application/MainPage/settings.dart';
 
 
 class Nav extends StatefulWidget {
@@ -17,7 +18,7 @@ class _NavState extends State<Nav> {
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     HomePage(),
-    HomePage(),
+    SettingsPage(),
 
   ];
 

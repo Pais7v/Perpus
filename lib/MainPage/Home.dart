@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                               height: 165,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(15), // Sesuaikan dengan radius yang Anda inginkan
-                                child: Image.asset('images/laskarPelangi.jpg'),
+                                child: Image.asset('images/erere.jpeg'),
                               ),
                             ),
                             SizedBox(height: 5),
@@ -184,14 +184,14 @@ class _HomePageState extends State<HomePage> {
                       height: 165,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(1), // Sesuaikan dengan radius yang Anda inginkan
-                        child: Image.asset('images/StudentHidjo.jpg'),
+                        child: Image.asset('images/dilan.jpg'),
                         ),
                       ),
                       SizedBox(height: 5),
                       Padding(padding: EdgeInsets.only(),
                       child: Center(
                         child: Text(
-                        'Student Hidjo',
+                        'Dilan 1990',
                         style: TextStyle(fontSize: 15,color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -207,14 +207,14 @@ class _HomePageState extends State<HomePage> {
                       height: 165,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15), // Sesuaikan dengan radius yang Anda inginkan
-                        child: Image.asset('images/Rudy.jpg'),
+                        child: Image.asset('images/conan.jpeg'),
                         ),
                       ),
                       SizedBox(height: 5),
                       Padding(padding: EdgeInsets.only(),
                       child: Center(
                         child: Text(
-                        'Rudy',
+                        'D.Conan',
                         style: TextStyle(fontSize: 15,color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -230,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                       height: 165,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15), // Sesuaikan dengan radius yang Anda inginkan
-                        child: Image.asset('images/laskarPelangi.jpg'),
+                        child: Image.asset('images/erere.jpeg'),
                         ),
                       ),
                       SizedBox(height: 5),
@@ -319,62 +319,115 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       Padding(padding: EdgeInsets.only(left: 5),
-                      child: Container(
-                        color: Colors.transparent, // Warna latar belakang container utama
-                        width: 400,
-                        height: 110,     
-                        child:Row(
-                          children: [
-                           Container(
-                              width: 90,
-                              height: 110,
-                              color: Colors.transparent,
-                              child: Image.asset(
-                        'images/laskarPelangi.jpg',
-                        fit: BoxFit.cover,
-                          ),
-                            ),
-                            Column(
+                      child: GestureDetector(
+                          onTap: () {
+                            // Ganti scene atau lakukan navigasi ke halaman lain di sini
+                            // Contoh:
+                            Navigator.push(
+                                    context,
+                                     PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) => DetailPage(),
+                                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        var curve = Curves.easeInOut;
+
+                                        var tween = Tween(begin: 0.0, end: 1.5).chain(CurveTween(curve: curve));
+
+                                          return FadeTransition(
+                                            opacity: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                   );
+                          },
+                          child: Container(
+                            color: Colors.transparent, // Warna latar belakang container utama
+                            width: 400,
+                            height: 110,
+                            child: Row(
                               children: [
-                                Padding(padding: EdgeInsets.only(right: 118),
-                                 child: Text('Laskar Pelangi',
-                                  style: TextStyle(color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.bold,fontSize: 17),
-                                 ),
-                                ),
-                                SizedBox(height: 5),
-                                Padding(padding: EdgeInsets.only(right: 160),
-                                  child: Text('Genre: Fiksi',
-                                    style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 21, 21, 21)),
-                                  ),
-                                ),  
-                                SizedBox(height: 5),
-                                Padding(padding: EdgeInsets.only(right: 100),
-                                  child: Text('Author: Andrea Hirata',
-                                    style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 21, 21, 21)),
+                                Container(
+                                  width: 90,
+                                  height: 110,
+                                  color: Colors.transparent,
+                                  child: Image.asset(
+                                    'images/erere.jpeg',
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(height: 5),
-                               Row(
-                                children: [
-                                   Padding(padding: EdgeInsets.only(left: 30),
-                                  child: Text('Rating:',
-                                    style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 21, 21, 21)),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 118),
+                                      child: Text(
+                                        'Laskar Pelangi',
+                                        style: TextStyle(
+                                          color: const Color.fromARGB(255, 21, 21, 21),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(padding: EdgeInsets.only(left: 175),
-                                  child: Icon(Icons.star,color: const Color.fromARGB(255, 250, 175, 63),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 160),
+                                      child: Text(
+                                        'Genre: Fiksi',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(255, 21, 21, 21),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  Text('4.7',
-                                  style: TextStyle(color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                               ),
+                                    SizedBox(height: 5),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 100),
+                                      child: Text(
+                                        'Author: Andrea Hirata',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromARGB(255, 21, 21, 21),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 30),
+                                          child: Text(
+                                            'Rating:',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color.fromARGB(255, 21, 21, 21),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 175),
+                                          child: Icon(
+                                            Icons.star,
+                                            color: const Color.fromARGB(255, 250, 175, 63),
+                                          ),
+                                        ),
+                                        Text(
+                                          '4.7',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(255, 21, 21, 21),
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                           ],
-                         ),
-                       ),
+                          ),
+                        ),
                      ),  
                      SizedBox(height: 10),
                      Divider( // Garis pemisah
@@ -397,14 +450,14 @@ class _HomePageState extends State<HomePage> {
                               height: 110,
                               color: Colors.transparent,
                               child: Image.asset(
-                        'images/Rudy.jpg',
+                        'images/conan.jpeg',
                         fit: BoxFit.cover,
                           ),
                             ),
                             Column(
                               children: [
                                 Padding(padding: EdgeInsets.only(right: 190),
-                                 child: Text('Rudy',
+                                 child: Text('D.Conan',
                                   style: TextStyle(color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.bold,fontSize: 17),
                                  ),
                                 ),
@@ -464,14 +517,14 @@ class _HomePageState extends State<HomePage> {
                               height: 110,
                               color: Colors.transparent,
                               child: Image.asset(
-                        'images/StudentHidjo.jpg',
+                        'images/dilan.jpg',
                         fit: BoxFit.cover,
                           ),
                             ),
                             Column(
                               children: [
                                 Padding(padding: EdgeInsets.only(right: 125),
-                                 child: Text('Student Hidjo',
+                                 child: Text('Dilan 1990',
                                   style: TextStyle(color: const Color.fromARGB(255, 21, 21, 21),fontWeight: FontWeight.bold,fontSize: 17),
                                  ),
                                 ),
@@ -531,7 +584,7 @@ class _HomePageState extends State<HomePage> {
                               height: 110,
                               color: Colors.transparent,
                               child: Image.asset(
-                        'images/laskarPelangi.jpg',
+                        'images/erere.jpeg',
                         fit: BoxFit.cover,
                           ),
                             ),

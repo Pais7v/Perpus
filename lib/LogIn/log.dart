@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/LogIn/reg.dart';
 import 'package:flutter_application/LogIn/forgot.dart';
-import 'package:flutter_application/MainPage/Home.dart';
+import 'package:flutter_application/MainPage/Navbar.dart';
 
 
 
@@ -188,7 +188,7 @@ class _MyTextFieldState extends State<MyTextField> {
                                   Navigator.push(
                                     context,
                                      PageRouteBuilder(
-                                      pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
+                                      pageBuilder: (context, animation, secondaryAnimation) => Nav(),
                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                         var curve = Curves.easeInOut;
 
