@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/MainPage/Home.dart';
 import 'package:flutter_application/MainPage/Navbar.dart';
 import 'dart:ui';
-
 import 'package:flutter_application/MainPage/peminjaman.dart';
 
-class DetailPage extends StatelessWidget {
+
+
+class DetailPage extends StatefulWidget {
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool _isBookmarked = false;
+
+  void _toggleBookmark() {
+    setState(() {
+      _isBookmarked = !_isBookmarked;
+    });
+  }
+
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +41,12 @@ class DetailPage extends StatelessWidget {
         ),
       ),
       extendBodyBehindAppBar:
-          true, // panjang di bawah AppBar
+          true, 
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Stack(
           children: [
-            // Background blur image
+           
             Positioned(
               top: 0,
               left: 0,
@@ -134,6 +148,15 @@ class DetailPage extends StatelessWidget {
                           Text(' Andrea Hirata',
                           style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
                           ),
+                          SizedBox(width: 85),
+                          IconButton(
+                            icon: Icon(
+                              _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                              size: 27.0,
+                              color: Colors.blue,
+                            ),
+                            onPressed: _toggleBookmark,
+                          ),
                         ],
                       ),
                     ],
@@ -165,6 +188,7 @@ class DetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                    
                   SizedBox(height: 15),
                   SizedBox(
                             child: Padding(padding: EdgeInsets.only(left: 60),
