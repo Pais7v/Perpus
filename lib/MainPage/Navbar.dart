@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/MainPage/Home.dart';
 import 'package:flutter_application/MainPage/peminjaman.dart';
+import 'package:flutter_application/MainPage/profile.dart';
 import 'package:flutter_application/MainPage/settings.dart';
 
 
@@ -18,8 +19,8 @@ class _NavState extends State<Nav> {
 
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Peminjaman(),
-    SettingsPage(),
+    PengembalianScreen(),
+   ProfileScreen(),
 
   ];
 
@@ -55,8 +56,8 @@ Widget build(BuildContext context) {
                 label: 'History',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'Settings',
+                icon: Icon(Icons.person_2_outlined),
+                label: 'Profil',
               ),
             ],
             currentIndex: _selectedIndex,

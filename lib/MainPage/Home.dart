@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/MainPage/detail.dart';
+import 'package:flutter_application/MainPage/profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,15 +32,24 @@ class _HomePageState extends State<HomePage> {
             children: [
              Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(top: 25,left: 25),
-                  child: SizedBox(
-                      width: 60, // Atur lebar yang Anda inginkan di sini
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40), // Sesuaikan dengan radius yang Anda inginkan
-                        child: Image.asset('images/Elon.jpg'),
-                      ),
-                    ),
-                  ),
+                  Padding(
+        padding: EdgeInsets.only(top: 25, left: 25),
+        child: SizedBox(
+          width: 60, // Atur lebar yang Anda inginkan di sini
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(40), // Sesuaikan dengan radius yang Anda inginkan
+              child: Image.asset('images/Elon.jpg'),
+            ),
+          ),
+        ),
+      ),
                   SizedBox(width: 270),
                   Padding(padding: EdgeInsets.only(top: 28),
                     child: Icon(

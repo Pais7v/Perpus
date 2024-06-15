@@ -1,176 +1,111 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-class SettingsPage extends StatefulWidget {
-  @override
-  _SettingsPageState createState() => _SettingsPageState();
+import 'package:flutter/material.dart'; 
+ 
+class PengembalianItem { 
+  final String title; 
+  final String description; 
+  final bool isRead; 
+  final String imagePath; 
+ 
+  PengembalianItem(this.title, this.description, this.isRead, this.imagePath); 
+} 
+ 
+class PengembalianScreen extends StatefulWidget { 
+  const PengembalianScreen({Key? key}); 
+ 
+  @override 
+  State<PengembalianScreen> createState() => _PengembalianScreenState(); 
+} 
+ 
+class _PengembalianScreenState extends State<PengembalianScreen> { 
+  final List<PengembalianItem> _pengembalianList = [ 
+    PengembalianItem('Bumi Manusia', 'By Pramoedya Ananta Toer', true, 
+        'images/dilan.jpg'), 
+    PengembalianItem('Laut Bercerita', 'By Leila S. Chudori', true, 
+        'images/dilan.jpg'), 
+    PengembalianItem('Laut Bercerita', 'By Leila S. Chudori', false, 
+        'assets/images/laut_bercerita.jpg'), 
+    // Add other data as needed 
+  ]; 
+ 
+  @override 
+  Widget build(BuildContext context) { 
+    List<PengembalianItem> readItems = 
+        _pengembalianList.where((item) => item.isRead).toList(); 
+    List<PengembalianItem> unreadItems = 
+        _pengembalianList.where((item) => !item.isRead).toList(); 
+ 
+    return Scaffold( 
+      appBar: AppBar( 
+        leading: IconButton( 
+          icon: const Icon(Icons.arrow_back, color: Colors.white), 
+          onPressed: () { 
+            Navigator.pop(context); 
+          }, 
+        ), 
+        title: const Text('Return'), 
+      ), 
+      body: ListView( 
+        children: [ 
+          if (unreadItems.isNotEmpty) ...[ 
+            const Padding( 
+              padding: EdgeInsets.all(8.0), 
+              child: Text( 
+                'Currently on loan', 
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), 
+              ), 
+            ), 
+            ...unreadItems.map((item) => _buildListItem(item, false)).toList(), 
+          ], 
+          if (readItems.isNotEmpty) ...[ 
+            const Padding( 
+              padding: EdgeInsets.all(8.0), 
+              child: Text( 
+                'It has been returned', 
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold), 
+              ), 
+            ), 
+            ...readItems.map((item) => _buildListItem(item, true)).toList(), 
+          ], 
+        ], 
+      ), 
+    ); 
+  } 
+ 
+  Widget _buildListItem(PengembalianItem item, bool showDeleteIcon) { 
+    return Card( 
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0), 
+      child: ListTile( 
+        contentPadding: const EdgeInsets.all(16.0), 
+        leading: Container( 
+          width: 150.0, // Set a larger fixed width 
+          height: 200.0, // Set a larger fixed height 
+          decoration: BoxDecoration( 
+            image: DecorationImage( 
+              image: AssetImage(item.imagePath), 
+              fit: BoxFit.cover, // Maintain aspect ratio and cover the entire container 
+            ), 
+            borderRadius: BorderRadius.circular(8.0), // Optional: add rounded corners 
+          ), 
+        ), 
+        title: Text( 
+          item.title, 
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), 
+        ), 
+        subtitle: Text( 
+          item.description, 
+          style: const TextStyle(fontSize: 14, color: Colors.grey), 
+        ), 
+        trailing: showDeleteIcon 
+            ? IconButton( 
+                icon: const Icon(Icons.delete, color: Colors.red), 
+                onPressed: () { 
+                  setState(() { 
+                    _pengembalianList.remove(item); 
+                  }); 
+                }, 
+              ) 
+            : null, 
+      ), 
+    ); 
+  } 
 }
-
-class _SettingsPageState extends State<SettingsPage> {
-  bool _isRecentBookNotificationEnabled = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-        child: ListView(
-          children: [
-            Text(
-              "Settings",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            buildSettingsOptionRow(context, "Account", [
-              "Change password",
-              "Social",
-              "Language",
-              "Privacy and security",
-            ]),
-            SizedBox(
-              height: 40,
-            ),
-            buildSettingsOptionRow(context, "Notifications", [
-              "Recent book",
-            ]),
-            SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  "SIGN OUT",
-                  style: TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 2.2,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildSettingsOptionRow(
-      BuildContext context, String title, List<String> options) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        Divider(
-          height: 15,
-          thickness: 2,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: options.length,
-          itemBuilder: (BuildContext context, int index) {
-            String option = options[index];
-            if (title == "Notifications" && option == "Recent book") {
-              return buildNotificationOptionRow(
-                  option, _isRecentBookNotificationEnabled);
-            } else {
-              return buildSettingsListTile(option);
-            }
-          },
-        ),
-      ],
-    );
-  }
-
-  Row buildNotificationOptionRow(String title, bool isActive) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Colors.grey[600],
-          ),
-        ),
-        Transform.scale(
-          scale: 0.7,
-          child: CupertinoSwitch(
-            value: isActive,
-            onChanged: (bool val) {
-              setState(() {
-                _isRecentBookNotificationEnabled = val;
-              });
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  GestureDetector buildSettingsListTile(String title) {
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(title),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Placeholder content"),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Close"),
-                ),
-              ],
-            );
-          },
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
-              ),
-            ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.grey,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
