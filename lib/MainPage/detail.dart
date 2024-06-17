@@ -23,11 +23,12 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: AppBar(
         backgroundColor: Colors.transparent, 
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
              Navigator.push( 
               context, 
@@ -179,7 +180,7 @@ class _DetailPageState extends State<DetailPage> {
                        Text(
                           ' Dirilis pada tahun 2005 oleh penerbit Bentang Pustaka, novel ini bahkan telah melalang buana hingga ke kancah internasional. Buktinya, novel ini telah diterjemahkan ke dalam 40 bahasa asing, terbit dalam 22 bahasa, dan telah beredar di lebih dari 130 negara. Novel yang terinspirasi dari kisah nyata kehidupan Andrea Hirata ini, juga telah berhasil meraih beberapa penghargaan. Salah satunya adalah novel ”Laskar Pelangi” edisi Amerika berhasil keluar sebagai pemenang pertama New York Book Festival 2013 kategori General Fiction. Tidak hanya itu saja, novel ini juga berhasil meraih peringkat pertama Buchawards 2013 untuk edisi Jewrman-nya yang berjudul Die Regenbogen Truppe Karena kisahnya yang inpiratif, novel “Laskar Pelangi” telah banyak diadaptasi ke dalam berbagai bentuk seperti layar lebar, drama musikal, serial televisi, lagu, dan bahkan koreografi oleh Citydance Company di Washington D.C. Film adaptasi-nya yang disutradarai oleh Riri Riza, juga ditayangkan di Smithsonian dan Berlinale (The Berlin Innternational Film Festival).',
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 16,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),

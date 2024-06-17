@@ -53,9 +53,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override 
   Widget build(BuildContext context) { 
     return Scaffold( 
+      backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: AppBar( 
+        backgroundColor: Color.fromARGB(255, 250, 250, 250),
         leading: IconButton( 
-          icon: const Icon(Icons.arrow_back, color: Colors.white), 
+          icon: const Icon(Icons.arrow_back, color: Colors.black), 
           onPressed: () { 
             Navigator.pop(context); 
           }, 
@@ -136,7 +138,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () { 
                 _showClassConfirmationDialog(context); 
               }, 
-              child: const Text('Confirm'), 
+              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 82, 137, 215),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10), // Atur radius sesuai kebutuhan Anda
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  width: 200, // Atur lebar sesuai kebutuhan Anda
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                ),
             ), 
             const SizedBox(height: 40), 
           ], 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/MainPage/detail.dart';
+import 'package:flutter_application/MainPage/settings.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Peminjaman extends StatefulWidget {
@@ -25,11 +26,18 @@ class _PeminjamanState extends State<Peminjaman> {
     }
   }
 
+  void _deleteReview(int index) {
+    setState(() {
+      _reviews.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 250, 250, 250),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(255, 250, 250, 250),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -128,12 +136,43 @@ class _PeminjamanState extends State<Peminjaman> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle book return
-                      },
-                      child: Text('Pengembalian Buku'),
+                     Navigator.push(context,
+                                     PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) => PengembalianScreen(),
+                                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        var curve = Curves.easeInOut;
+
+                                        var tween = Tween(begin: 0.0, end: 1.0).chain(CurveTween(curve: curve));
+
+                                          return FadeTransition(
+                                            opacity: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                    );
+                      }, 
+                      style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 82, 137, 215),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10), // Atur radius sesuai kebutuhan Anda
+                                  ),
+                                ),
+                                  child: SizedBox(
+                                  width: 200, // Atur lebar sesuai kebutuhan Anda
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Center(
+                                      child: Text(
+                                        "Pengembalian Buku",
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 25),
                   Center(
                     child: Column(
                       children: [
@@ -171,10 +210,27 @@ class _PeminjamanState extends State<Peminjaman> {
                           ),
                           maxLines: 3,
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: _submitReview,
-                          child: Text('Submit Review'),
+                         style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 82, 137, 215),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10), // Atur radius sesuai kebutuhan Anda
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  width: 200, // Atur lebar sesuai kebutuhan Anda
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Center(
+                                      child: Text(
+                                        "Submit Review",
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                         ),
                       ],
                     ),
@@ -191,48 +247,69 @@ class _PeminjamanState extends State<Peminjaman> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        ..._reviews.map((review) {
-                          return Card(
-                            elevation: 4.0,
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Rating: ',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                        ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: _reviews.length,
+                          itemBuilder: (context, index) {
+                            final review = _reviews[index];
+                            return Card(
+                              elevation: 4.0,
+                              margin: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Rating: ',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            RatingBarIndicator(
+                                              rating: double.parse(review['rating']!),
+                                              itemBuilder: (context, index) => Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              ),
+                                              itemCount: 5,
+                                              itemSize: 20.0,
+                                              direction: Axis.horizontal,
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      RatingBarIndicator(
-                                        rating: double.parse(review['rating']!),
-                                        itemBuilder: (context, index) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () {
+                                            _deleteReview(index);
+                                          },
                                         ),
-                                        itemCount: 5,
-                                        itemSize: 20.0,
-                                        direction: Axis.horizontal,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    review['review']!,
-                                    style: TextStyle(
-                                      fontSize: 16,
+                                      ],
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(height: 8),
+                                    Text(
+                                      review['review']!,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        }).toList(),
+                            );
+                          },
+                        ),
                       ],
                     ),
                 ],
@@ -243,14 +320,4 @@ class _PeminjamanState extends State<Peminjaman> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    title: 'Halaman Peminjaman Buku',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: Peminjaman(),
-  ));
 }
