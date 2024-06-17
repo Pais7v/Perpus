@@ -13,6 +13,12 @@ class _SgnState extends State<Sgn> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _cnfrmpasswordController = TextEditingController();
   bool _isPasswordVisible = false;
+   String? _selectedGender;
+   final List<String> _genders = ['Male', 'Female', 'Other']; 
+   String? _selectedClass;
+   final List<String> _classes = ['XI PPLG 1', 'XI PPLG 2', 'XI PPLG 3']; 
+  
+  
 
   @override
   void initState() {
@@ -45,6 +51,7 @@ class _SgnState extends State<Sgn> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 101, 170, 227),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Center(
           child: Padding(
             padding: EdgeInsets.only(top: 150),
@@ -196,59 +203,148 @@ class _SgnState extends State<Sgn> {
                       ),
                     ),
                      Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Confirm password',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          SizedBox(
-                            width: 350,
-                            height: 50,
-                            child: TextField(
-                              controller: _cnfrmpasswordController,
-                              obscureText: !_isPasswordVisible,
-                              decoration: InputDecoration(
-                                hintText: 'Enter Password',
-                                hintStyle: TextStyle(color: Color.fromARGB(98, 0, 0, 0)),
-                                labelText: 'Password',
-                                prefixIcon: Icon(Icons.lock),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                fillColor: Color.fromARGB(147, 245, 245, 245),
-                                filled: true,
-                                suffixIcon: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Confirm password',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: TextField(
+                            controller: _cnfrmpasswordController,
+                            obscureText: !_isPasswordVisible,
+                            decoration: InputDecoration(
+                              hintText: 'Enter Password',
+                              hintStyle: TextStyle(color: Color.fromARGB(98, 0, 0, 0)),
+                              labelText: 'Password',
+                              prefixIcon: Icon(Icons.lock),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              fillColor: Color.fromARGB(147, 245, 245, 245),
+                              filled: true,
+                              suffixIcon: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isPasswordVisible = !_isPasswordVisible;
+                                      });
+                                    },
+                                    icon: Icon(
+                                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                                    ),
+                                  ),
+                                  if (_cnfrmpasswordController.text.isNotEmpty)
                                     IconButton(
                                       onPressed: () {
-                                        setState(() {
-                                          _isPasswordVisible = !_isPasswordVisible;
-                                        });
+                                        _cnfrmpasswordController.clear();
                                       },
-                                      icon: Icon(
-                                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                                      ),
+                                      icon: const Icon(Icons.clear),
                                     ),
-                                    if (_cnfrmpasswordController.text.isNotEmpty)
-                                      IconButton(
-                                        onPressed: () {
-                                          _cnfrmpasswordController.clear();
-                                        },
-                                        icon: const Icon(Icons.clear),
-                                      ),
-                                  ],
-                                ),
+                                ],
                               ),
-                            )
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Gender",
+                          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              labelText: 'Gender',
+                              labelStyle: TextStyle(color: Color.fromARGB(158, 0, 0, 0)),
+                              prefixIcon: Icon(Icons.person),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              fillColor: Color.fromARGB(147, 245, 245, 245),
+                              filled: true,
+                            ),
+                            value: _selectedGender,
+                            items: _genders.map((String gender) {
+                              return DropdownMenuItem<String>(
+                                value: gender,
+                                child: Text(
+                                  gender,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedGender = newValue;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Class",
+                          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              
+                              labelText: 'Class',
+                              labelStyle: TextStyle(color: Color.fromARGB(158, 0, 0, 0)),
+                              prefixIcon: Icon(Icons.person),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              fillColor: Color.fromARGB(147, 245, 245, 245),
+                              filled: true,
+                            ),
+                            value: _selectedClass,
+                            items: _classes.map((String Class) {
+                              return DropdownMenuItem<String>(
+                                value: Class,
+                                child: Text(
+                                  Class,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedClass = newValue;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                     SizedBox(height: 50),
                           SizedBox(
                             child: Padding(padding: EdgeInsets.only(left: 5),
@@ -356,6 +452,7 @@ class _SgnState extends State<Sgn> {
                       ),
                     ],
                    ),
+                   const SizedBox(height: 50),
                   ],
                 ),
               ],
